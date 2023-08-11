@@ -1,0 +1,516 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Job List{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+
+        <!-- Nouislider Css -->
+        <link rel="stylesheet" href="{% static 'libs/nouislider/dist/nouislider.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Job List</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Job List </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                    <!-- START JOB-LIST -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <div class="me-lg-5">
+                                        <div class="job-list-header">
+                                            <form action="#">
+                                                {% csrf_token %}
+                                                <div class="row g-2">
+                                                    <div class="col-lg-3 col-md-6">
+                                                        <div class="filler-job-form">
+                                                            <i class="uil uil-briefcase-alt"></i>
+                                                            <input type="search" class="form-control filter-job-input-box" id="exampleFormControlInput1" placeholder="Job, company... ">
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-3 col-md-6">
+                                                        <div class="filler-job-form">
+                                                            <i class="uil uil-location-point"></i>
+                                                            <select class="form-select" data-trigger name="choices-single-location" id="choices-single-location" aria-label="Default select example">
+                                                                <option value="All">All</option>
+                                                                {% for location in locations %}
+                                                                    <option value="{{ location }}">{{ location }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-3 col-md-6">
+                                                        <div class="filler-job-form">
+                                                            <i class="uil uil-clipboard-notes"></i>
+                                                            <select class="form-select " data-trigger name="choices-single-categories" id="choices-single-categories" aria-label="Default select example">
+                                                                <option value="All">All</option>
+                                                                {% for cat in categories %}
+                                                                    <option value="{{cat.name}}">{{cat.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                    <div class="col-lg-3 col-md-6">
+                                                        <a onclick="sorted_jobs()" class="btn btn-primary w-100"><i class="uil uil-filter"></i> Fliter</a>
+                                                    </div><!--end col-->
+                                                </div><!--end row-->
+                                            </form>
+                                        </div><!--end job-list-header-->
+
+                                        <!-- Job-list -->
+                                        <div id="data_div" >
+
+                                            {% for job in job_list %}
+                                            <div class="job-box card mt-5">
+
+                                                <div class="p-4">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-2">
+                                                            <div class="text-center mb-4 mb-lg-0">
+                                                                <a href="{% url 'company-details' job.company_id %}"><img src="{% if job.company.profile_pic %} /{{job.company.profile_pic}} {% else %}{% static 'images/featured-job/img-01.png' %}{% endif %}" alt="" class="img-fluid rounded-3"></a>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-md-3">
+                                                            <div class="mb-2 mb-md-0">
+                                                                <h5 class="fs-18 mb-0"><a href="{% url 'job-details' job.id %}" class="text-dark">{{ job.job_title }}</a></h5>
+                                                                <p class="text-muted fs-14 mb-0">{{ job.designation }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-md-3">
+                                                            <div class="d-flex mb-2">
+                                                                <div class="flex-shrink-0">
+                                                                    <i class="mdi mdi-map-marker text-primary me-1"></i>
+                                                                </div>
+                                                                <p class="text-muted"> {{ job.country }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-md-2">
+                                                            <div class="d-flex mb-0">
+                                                                <div class="flex-shrink-0">
+                                                                    <i class="uil uil-clock-three text-primary me-1"></i>
+                                                                </div>
+                                                                <p class="text-muted mb-0"> {{ job.time_ago }} </p>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                        <div class="col-md-2">
+                                                            <div>
+                                                                <span class="badge bg-soft-success fs-13 mt-1">{{job.job_type}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+                                                <div class="p-3 bg-light">
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-md-4">
+                                                            <div>
+                                                                <p class="text-muted mb-0"><span class="text-dark">Salary : </span>{{ job.salary }} $</p>
+                                                            </div>
+                                                        </div>
+                                                        <!--end col-->
+
+                                                        <!--end col-->
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+                                            <!--end job-box-->
+
+                                        </div>
+                                        <!-- End Job-list -->
+                                        <div class="row">
+                                            <div class="col-lg-12 mt-4 pt-2">
+
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination job-pagination mb-0 justify-content-center">
+                                                        {% if job_list.has_previous %}
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="{% url 'job-list' %}?page={{ job_list.previous_page_number }}">
+                                                                    <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% else %}
+                                                            <li class="page-item disabled">
+                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                                    <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% endif %}
+
+                                                        {% for page in job_list.paginator.page_range %}
+                                                            {% if job_list.number == page %}
+                                                                <li class="page-item active">
+                                                                    <a class="page-link" href="javascript:void(0)">{{ page }}</a>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="{% url 'job-list' %}?page={{ page }}">{{ page }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+
+                                                        {% if job_list.has_next %}
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="{% url 'job-list' %}?page={{ job_list.next_page_number }}">
+                                                                    <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% else %}
+                                                            <li class="page-item disabled">
+                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                                    <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                                </a>
+                                                            </li>
+                                                        {% endif %}
+                                                    </ul>
+                                                </nav>
+
+                                            </div><!--end col-->
+                                        </div><!-- end row -->
+                                    </div>
+                                </div><!--end col-->
+
+                                <!-- START SIDE-BAR -->
+                                <div class="col-lg-3">
+                                    <div class="side-bar mt-5 mt-lg-0">
+                                        <div class="accordion" id="accordionExample">
+
+
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="experienceOne">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#experience" aria-expanded="true" aria-controls="experience">
+                                                        Work experience
+                                                    </button>
+                                                </h2>
+                                                <div id="experience" class="accordion-collapse collapse show" aria-labelledby="experienceOne">
+                                                    <div class="accordion-body">
+                                                        <div class="side-title">
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" name="experience_check" data-bs="no experience"/>
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked1">No experience</label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" name="experience_check" data-bs="3 years"/>
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked2">0-3 years</label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="3-6 years" id="flexCheckChecked3"
+                                                                name="experience_check" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked3">3-6 years</label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="more than 6" id="flexCheckChecked4"
+                                                                name="experience_check"/>
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked4">More than 6 years</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end accordion-item -->
+
+                                            <div class="accordion-item mt-3">
+                                                <h2 class="accordion-header" id="jobType">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobtype" aria-expanded="false" aria-controls="jobtype">
+                                                        Type of employment
+                                                    </button>
+                                                </h2>
+                                                <div id="jobtype" class="accordion-collapse collapse show" aria-labelledby="jobType">
+                                                    <div class="accordion-body">
+                                                        <div class="side-title">
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="radio" name="job_type" data-bs="Freelancer" id="flexRadioDefault6" >
+                                                                <label class="form-check-label ms-2 text-muted" for="flexRadioDefault6">
+                                                                    Freelance
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="radio" name="job_type" data-bs="Full Time" id="flexRadioDefault2">
+                                                                <label class="form-check-label ms-2 text-muted" for="flexRadioDefault2">
+                                                                    Full Time
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="radio" name="job_type" data-bs="Internship" id="flexRadioDefault3">
+                                                                <label class="form-check-label ms-2 text-muted" for="flexRadioDefault3">
+                                                                    Internship
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="radio" name="job_type" data-bs="Part Time" id="flexRadioDefault4">
+                                                                <label class="form-check-label ms-2 text-muted" for="flexRadioDefault4">
+                                                                    Part Time
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end accordion-item -->
+
+                                            {% comment %}
+
+                                            <div class="accordion-item mt-3">
+                                                <h2 class="accordion-header" id="datePosted">
+                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dateposted" aria-expanded="false" aria-controls="dateposted">
+                                                        Date Posted
+                                                    </button>
+                                                </h2>
+                                                <div id="dateposted" class="accordion-collapse collapse show" aria-labelledby="datePosted">
+                                                    <div class="accordion-body">
+                                                        <div class="side-title form-check-all">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="checkAll" data-bs="All" name="posted_date_check"
+                                                                checked/>
+                                                                <label class="form-check-label ms-2 text-muted" for="checkAll">
+                                                                    All
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox"  data-bs="last hour" name="posted_date_check"  id="flexCheckChecked5" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked5">
+                                                                    Last Hour
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="last 24 hours" name="posted_date_check" id="flexCheckChecked6" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked6">
+                                                                    Last 24 hours
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="last 7 days" name="posted_date_check" id="flexCheckChecked7" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked7">
+                                                                    Last 7 days
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="last 14 days" name="posted_date_check" id="flexCheckChecked8" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked8">
+                                                                    Last 14 days
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" data-bs="last 30 days" name="posted_date_check" id="flexCheckChecked9" />
+                                                                <label class="form-check-label ms-2 text-muted" for="flexCheckChecked9">
+                                                                    Last 30 days
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end accordion-item -->
+
+                                            {% endcomment %}
+
+                                            <!--<div class="accordion-item mt-3">-->
+                                            <!--    <h2 class="accordion-header" id="tagCloud">-->
+                                            <!--        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tagcloud" aria-expanded="false" aria-controls="tagcloud">-->
+                                            <!--            Tags Cloud-->
+                                            <!--        </button>-->
+                                            <!--    </h2>-->
+                                            <!--    <div id="tagcloud" class="accordion-collapse collapse show" aria-labelledby="tagCloud">-->
+                                            <!--        <div class="accordion-body">-->
+                                            <!--            <div class="side-title">-->
+                                            <!--                <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">design</a>-->
+                                            <!--                <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">marketing</a>-->
+                                            <!--                <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">business</a>-->
+                                            <!--                <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">developer</a>-->
+                                            <!--            </div>-->
+                                            <!--        </div>-->
+                                            <!--    </div>-->
+                                            <!--</div><!-- end accordion-item -->-->
+
+                                            <div class="mt-4">
+                                                <button class="btn btn-primary btn-hover w-100 rounded" onclick="filter_features_jobs()">Filter Jobs <i class="uil uil-filter"></i>
+                                                </button>
+                                            </div>
+
+                                        </div><!--end accordion-->
+
+                                    </div><!--end side-bar-->
+                                </div><!--end col-->
+                                <!-- END SIDE-BAR -->
+                            </div><!--end row-->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END JOB-LIST -->
+
+                    <!-- START APPLY MODAL -->
+                    <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body p-5">
+                                    <div class="text-center mb-4">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+                                    </div>
+                                    <div class="position-absolute end-0 top-0 p-3">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nameControlInput" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="nameControlInput" placeholder="Enter your name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailControlInput2" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="emailControlInput2" placeholder="Enter your email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="messageControlTextarea" class="form-label">Message</label>
+                                        <textarea class="form-control" id="messageControlTextarea" rows="4" placeholder="Enter your message"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="inputGroupFile01">Resume Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile01">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Send Application</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- END APPLY MODAL -->
+{% endblock content %}
+{% block javascript %}
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- Nouislider Js -->
+        <script src="{% static 'libs/nouislider/dist/nouislider.min.js' %}"></script>
+        <script src="{% static 'js/pages/area-filter-range.init.js' %}"></script>
+
+        <!-- Job-list Init Js -->
+        <script src="{% static 'js/pages/job-list.init.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+
+        <script type="text/javascript">
+             window.onload = function() {
+              var tags = document.getElementsByTagName("*"); // Get all tags in the document
+              for (var i = 0; i < tags.length; i++) {
+                var tag = tags[i];
+                tag.setAttribute("value", tag.innerHTML); // Set the value attribute to the inner content
+              }
+            };
+        </script>
+        <script type="text/javascript">
+            function filter_features_jobs(){
+                var exp_list = [...$('input[name=experience_check]:checked')].map(ele => ele.dataset.bs);
+                var job_type = $('input[name=job_type]:checked');
+                if (job_type.length > 0){
+                    job_type = job_type[0].dataset.bs
+                }
+                else{
+                job_type = ""
+                }
+                var date_posted = [...$('input[name=posted_date_check]:checked')].map(ele => ele.dataset.bs);
+                console.log(exp_list)
+                console.log(job_type)
+                console.log(date_posted)
+
+                $.ajaxSetup({
+                    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                  });
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'search-job-list' %}",
+                    data: {
+
+                        "exp_list": exp_list.toString(),
+                        "job_type": job_type,
+                        "date_posted": date_posted.toString(),
+
+                    },
+                    success: (response) => {
+
+                        $("#data_div").html(response.data);
+
+                    },
+                    error: function (response) {
+                      // alert(response["responseJSON"]["error"]);
+                      // $('#loader').modal('hide');
+                    }
+                  });
+
+            }
+
+            function sorted_jobs(){
+
+
+                $.ajaxSetup({
+                    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                  });
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'job-list' %}",
+                    data: {
+
+                        "location":  $("#choices-single-location option:selected").text(),
+                        "expertise":  $("#choices-single-categories option:selected").text(),
+                        "search":  document.getElementById('exampleFormControlInput1').value,
+
+                    },
+                    success: (response) => {
+
+                        $("#data_div").html(response.data);
+
+                    },
+                    error: function (response) {
+                      // alert(response["responseJSON"]["error"]);
+                      // $('#loader').modal('hide');
+                    }
+                  });
+
+            }
+
+
+        </script>
+{% endblock javascript %}

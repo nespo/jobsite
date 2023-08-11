@@ -1,0 +1,796 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}My Profile{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">My Profile</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">My Profile</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> My Profile </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                    <!-- START PROFILE -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card profile-sidebar me-lg-4">
+                                        <div class="card-body p-4">
+                                            <div class="text-center pb-4 border-bottom">
+                                                <img src="{% if not user_info.profile_pic %}{% static 'images/profile.jpg' %}{% else %}/{{ user_info.profile_pic }}{% endif %}" alt=""
+                                                    class="avatar-lg img-thumbnail rounded-circle mb-4" />
+                                                <h5 class="mb-0 text-uppercase">{% if not user_info.first_name %}{{ user.username }}{% else %}{{ user_info.first_name }} {{ user_info.last_name }}{% endif %}</h5>
+                                                <p class="text-muted">{% if user_info.profession  %}{{ user_info.profession }}{% endif %}</p>
+                                                <ul class="list-inline d-flex justify-content-center align-items-center ">
+                                                    <li class="list-inline-item text-warning fs-19">
+                                                        <i class="mdi mdi-star-outline"></i>
+                                                        <i class="mdi mdi-star-outline"></i>
+                                                        <i class="mdi mdi-star-outline"></i>
+                                                        <i class="mdi mdi-star-outline"></i>
+                                                        <i class="mdi mdi-star-outline"></i>
+                                                    </li>
+                                                </ul>
+                                                <ul class="candidate-detail-social-menu list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <a target="_blank" href="{{ user_info.facebook }}" class="social-link rounded-3 btn-soft-primary"><i
+                                                                class="uil uil-facebook-f"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a target="_blank" href="{{ user_info.twitter }}" class="social-link rounded-3 btn-soft-info"><i
+                                                                class="uil uil-twitter-alt"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a target="_blank" href="{{ user_info.watsapp }}" class="social-link rounded-3 btn-soft-success"><i
+                                                                class="uil uil-whatsapp"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a target="_blank" href="{{ user_info.linkedin }}" class="social-link rounded-3 btn-soft-info"><i
+                                                                class="uil uil-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!--end profile-->
+                                            <div class="mt-4 border-bottom pb-4">
+                                                <h5 class="fs-17 fw-bold mb-3">Documents</h5>  
+                                                <ul class="profile-document list-unstyled mb-0">
+                                                    {% if user_info.cv_file %}
+                                                        <li>
+                                                            <div class="profile-document-list d-flex align-items-center mt-4 ">
+                                                                <div class="icon flex-shrink-0">
+                                                                    <i class="uil uil-file"></i>
+                                                                </div>
+                                                                <div class="ms-3">
+                                                                    <h6 class="fs-16 mb-0">Resume.pdf</h6>
+                                                                    <p class="text-muted mb-0">{{ file_size }}</p>
+                                                                </div>
+                                                                <div class="ms-auto">
+                                                                    <a href="/{{ user_info.cv_file }}" download class="fs-20 text-muted"><i class="uil uil-import"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% else %}
+                                                        <li>
+                                                            <div class="profile-document-list d-flex align-items-center mt-4 ">
+                                                                <div class="icon flex-shrink-0">
+                                                                    <i class="uil uil-file"></i>
+                                                                </div>
+                                                                <div class="ms-3">
+                                                                    <h6 class="fs-16 mb-0">No Resume Found!</h6>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endif %}
+
+                                                    <!-- <li>
+                                                        <div class="profile-document-list d-flex align-items-center mt-4 ">
+                                                            <div class="icon flex-shrink-0">
+                                                                <i class="uil uil-file"></i>
+                                                            </div>
+                                                            <div class="ms-3">
+                                                                <h6 class="fs-16 mb-0">Cover-letter.pdf</h6>
+                                                                <p class="text-muted mb-0">1.25 MB</p>
+                                                            </div>
+                                                            <div class="ms-auto">
+                                                                <a href="{% static 'images/dark-logo.png' %}" download="dark-logo" class="fs-20 text-muted"><i class="uil uil-import"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </li> -->
+                                                </ul>
+                                            </div>
+                                            <!--end document-->
+                                            <div class="mt-4">
+                                                <h5 class="fs-17 fw-bold mb-3">Contacts</h5>
+                                                <div class="profile-contact">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li>
+                                                            <div class="d-flex">
+                                                                <label>Email</label>
+                                                                <div>
+                                                                    <p class="text-muted text-break mb-0">
+                                                                        {% if user.email %}{{ user.email }}{% endif %}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="d-flex">
+                                                                <label>Phone Number</label>
+                                                                <div>
+                                                                    <p class="text-muted mb-0"> {% if user_info.phone_number %}{{ user_info.phone_number }}{% endif %}</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="d-flex">
+                                                                <label>Location</label>
+                                                                <div>
+                                                                    <p class="text-muted mb-0">{% if user_info.location %}{{ user_info.location }}{% endif %}</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--end contact-details-->
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end profile-sidebar-->
+                                </div>
+                                <!--end col-->
+                                <div class="col-lg-8">
+                                    <div class="card profile-content-page mt-4 mt-lg-0">
+                                        <ul class="profile-content-nav nav nav-pills border-bottom mb-4" id="pills-tab"
+                                                role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="overview-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#overview" type="button" role="tab" aria-controls="overview"
+                                                        aria-selected="true">
+                                                        Overview
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="settings-tab" data-bs-toggle="pill"
+                                                        data-bs-target="#settings" type="button" role="tab" aria-controls="settings"
+                                                        aria-selected="false">
+                                                        Settings
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <!--end profile-content-nav-->
+                                        <div class="card-body p-4">
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                                    aria-labelledby="overview-tab">
+                                                    <div>
+                                                        <h5 class="fs-18 fw-bold">About</h5>
+                                                        <p class="text-muted mt-4">
+                                                            {% if user_info.introduction %} {{ user_info.introduction }} {% endif %}
+                                                        </p>
+                                                    </div>
+                                                    <div class="candidate-education-details mt-4">
+                                                        <h6 class="fs-18 fw-bold mb-0">Education</h6>
+                                                        {% if user_info.education_details %}
+                                                            {% for education in user_info.education_details %}
+                                                                <div class="candidate-education-content mt-4 d-flex">
+                                                                    <div class="circle flex-shrink-0 bg-soft-primary">
+                                                                        {{education.deg_name.0}}
+                                                                    </div>
+                                                                    <div class="ms-4">
+                                                                        <h6 class="fs-16 mb-1">
+                                                                            {{education.deg_name}}
+                                                                        </h6>
+                                                                        <p class="mb-2 text-muted">
+                                                                            {{education.school_name}} - ({{education.deg_start}} - {{education.deg_end}})
+                                                                        </p>
+                                                                        <p class="text-muted">
+                                                                            {{education.edu_description}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="candidate-education-details mt-4">
+                                                        <h6 class="fs-18 fw-bold mb-0">Experiences</h6>
+                                                        {% if user_info.experience_details %}
+                                                            {% for experience in user_info.experience_details %}
+                                                                <div class="candidate-education-content mt-4 d-flex">
+                                                                    <div class="circle flex-shrink-0 bg-soft-primary"> {{experience.exp_name.0}} </div>
+                                                                    <div class="ms-4">
+                                                                        <h6 class="fs-16 mb-1">{{experience.exp_name}}</h6>
+                                                                        <p class="mb-2 text-muted">{{experience.org_name}} - ({{experience.exp_start}} - {{experience.exp_end}})</p>
+                                                                        <p class="text-muted">{{experience.exp_desc}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h5 class="fs-18 fw-bold">Skills</h5>
+                                                        {% for i in skills %}
+                                                            <span class="badge fs-13 bg-soft-blue mt-2">{{ i }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <h5 class="fs-18 fw-bold">Spoken languages</h5>
+                                                        {% for i in languages %}
+                                                            <span class="badge fs-13 bg-soft-success mt-2">{{ i }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                                    <form action="{% url 'UserInfoUpdateView' %}" method="POST" enctype="multipart/form-data" onsubmit="return validatePassword();">
+                                                        {% csrf_token %}
+                                                        <div>
+                                                            <h5 class="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
+                                                            <div class="text-center">
+                                                                <div class="mb-4 profile-user">
+                                                                    <img src="{% if not user_info.profile_pic %}{% static 'images/profile.jpg' %}{% else %}/{{ user_info.profile_pic }}{% endif %}" class="rounded-circle img-thumbnail profile-img" id="profile-img" alt="">
+                                                                    <div class="p-0 rounded-circle profile-photo-edit">
+                                                                        <input id="profile-img-file-input" type="file" class="profile-img-file-input" onchange="previewImg(this)" name="profile_pic">
+                                                                        <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                                                            <i class="uil uil-edit"></i>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="firstName" class="form-label">First Name</label>
+                                                                        <input type="text" class="form-control" id="firstName" name="first_name" value="{% if user_info.first_name %}{{ user_info.first_name }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="lastName" class="form-label">Last Name</label>
+                                                                        <input type="text" class="form-control" id="lastName" name="last_name" value="{% if user_info.last_name %}{{ user_info.last_name }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="accountType" class="form-label">Profession</label>
+                                                                        <select class="form-select" name="profession" id="accountType">
+                                                                            <option value="">SELECT PROFESSION</option>
+                                                                            <option value="Accounting" {% if user_info.profession == 'Accounting' %}selected{% endif %}>Accounting</option>
+                                                                            <option value="Banking" {% if user_info.profession == 'Banking' %}selected{% endif %}>Banking</option>
+                                                                            <option value="IT" {% if user_info.profession == 'IT' %}selected{% endif %}>IT</option>
+                                                                            <option value="Marketing" {% if user_info.profession == 'Marketing' %}selected{% endif %}>Marketing</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="email" class="form-label">Email</label>
+                                                                        <input type="email" class="form-control" id="email" name="email" value="{% if user_info.user.email %}{{ user_info.user.email }}{% endif %}" disabled>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="phone" class="form-label">Phone Number</label>
+                                                                        <input type="phone_number" class="form-control" id="phone" name="phone_number" value="{% if user_info.phone_number %}{{ user_info.phone_number }}{% endif %}" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="location" class="form-label">Location</label>
+                                                                        <select class="form-select" id="location" name="location">
+                                                                            <option value="">SELECT LOCATION</option>
+                                                                            {% for location in locations %}
+                                                                                <option value="{{location}}" {% if user_info.location == location.location %}selected{% endif %}>{{location}}</option>
+                                                                            {% endfor %}
+                                                                            <!-- Add more options as needed -->
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Address</label>
+                                                                        <textarea class="form-control" name="address" rows="5">{% if user_info.address  %}{{ user_info.address }}{% endif %}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+                                                        </div>
+                                                        <!--end account-->
+                                                        <div class="mt-4">
+                                                            <h5 class="fs-17 fw-semibold mb-3">Profile</h5>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="introduction" class="form-label">Introduce Yourself</label>
+                                                                        <textarea class="form-control" id="introduction" name="introduction" rows="5">{% if user_info.introduction  %}{{ user_info.introduction }}{% endif %}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="languages" class="form-label">Languages</label>
+                                                                        <input type="text" class="form-control" id="languages" name="languages" value="{% if user_info.languages  %}{{ user_info.languages }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="skills" class="form-label">Skills</label>
+                                                                        <input type="text" class="form-control" id="skills" name="skills" value="{% if user_info.skills  %}{{ user_info.skills }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label  class="form-label">Latest Qualification</label>
+                                                                        <input type="text" class="form-control" name="qualification" value="{% if user_info.qualification  %}{{ user_info.qualification }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Professionals</label>
+                                                                        <input type="text" class="form-control"  name="professionals" value="{% if user_info.categories  %}{{ user_info.categories }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label  class="form-label">Total Experience</label>
+                                                                        <input type="text" class="form-control" name="experience" value="{% if user_info.experience_years  %}{{ user_info.experience_years }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Expected Salary</label>
+                                                                        <input type="text" class="form-control"  name="salary" value="{% if user_info.salary  %}{{ user_info.salary }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="cvFile" class="form-label">Attachments CV</label>
+                                                                        <input class="form-control" type="file" id="cvFile" name="cv_file">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="projects" class="form-label">Project</label>
+                                                                        <input class="form-control" multiple type="file" id="projects" name="projects">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+                                                        </div>
+                                                        <!--end profile-->
+                                                        
+
+                                                        <div class="mt-4" id="education-block">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h5 class="fs-17 fw-semibold mb-3">Education</h5>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <button type="button" onclick="add_eduction_form()" class="btn btn-secondary btn-sm"
+                                                                        style="border-radius: 50%; font-size: 30px;">+</button>
+                                                                </div>
+
+                                                            </div>
+
+                                                            {% if user_info.education_details %}
+                                                            {% for education in user_info.education_details %}
+
+
+
+
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Field of study</label>
+                                                                        <input type="text" class="form-control" name="study-field-{{loop.index}}" value="{{education.deg_name}}" >
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">School Name</label>
+                                                                        <input type="text" class="form-control" name="school-field-{{loop.index}}" 
+                                                                        value="{{education.school_name}}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Start Year</label>
+                                                                        <input type="text" class="form-control" name="deg-start-year-{{loop.index}}" value={{education.deg_start}}>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">End Year</label>
+                                                                        <input type="text" class="form-control" name="deg-end-year-{{loop.index}}"
+                                                                        value={{education.deg_end}} >
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Description</label>
+                                                                        <textarea class="form-control" name="deg-description-{{loop.index}}" rows="5"
+                                                                        >{{education.edu_description}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+
+                                                            {% endfor %}
+                                                        {% endif %}
+
+                                                        </div>
+                                                        <!--end Education-->
+                    
+                                                        <div class="mt-4" id="experience-block">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h5 class="fs-17 fw-semibold mb-3">Experience</h5>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <button type="button" onclick="add_experience_form()" class="btn btn-secondary btn-sm"
+                                                                        style="border-radius: 50%; font-size: 30px;">+</button>
+                                                                </div>
+                                                            </div>
+
+
+                                                                
+
+                                                           {% if user_info.experience_details %}
+                                                            {% for experience in user_info.experience_details %}
+
+                                                           <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Title</label>
+                                                                        <input type="text" class="form-control" name="experience-field-{{loop.index}}" value="{{experience.exp_name}}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Company name</label>
+                                                                        <input type="text" class="form-control" name="company-field-{{loop.index}}" value="{{experience.org_name}}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Start Year</label>
+                                                                        <input type="text" class="form-control" name="experience-start-year-{{loop.index}}" value={{experience.exp_start}}>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">End Year</label>
+                                                                        <input type="text" class="form-control" name="experience-end-year-{{loop.index}}" value={{experience.exp_end}}>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="description" class="form-label">Description</label>
+                                                                        <textarea class="form-control" name="experience-description-{{loop.index}}"
+                                                                            rows="5">{{experience.exp_desc}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div> 
+
+                                                            {% endfor %}
+                                                        {% endif %}
+
+                                                            <!--end row-->
+                                                        </div>
+                                                        <!--end Education--> 
+                                                        
+                                                        <div class="mt-4">
+                                                            <h5 class="fs-17 fw-semibold mb-3">Social Media</h5>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="facebook" class="form-label">Facebook</label>
+                                                                        <input type="url" class="form-control" id="facebook" name="facebook" value="{% if user_info.languages  %}{{ user_info.facebook }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="twitter" class="form-label">Twitter</label>
+                                                                        <input type="url" class="form-control" id="twitter" name="twitter" value="{% if user_info.twitter   %}{{ user_info.twitter }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="linkedin" class="form-label">Linkedin</label>
+                                                                        <input type="url" class="form-control" id="linkedin" name="linkedin" value="{% if user_info.linkedin  %}{{ user_info.linkedin }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="whatsapp" class="form-label">Whatsapp</label>
+                                                                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="{% if user_info.whatsapp  %}{{ user_info.whatsapp }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Skype</label>
+                                                                        <input type="text" class="form-control"  name="skype" value="{% if user_info.skype  %}{{ user_info.skype }}{% endif %}">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div> 
+                                                            <!--end row-->
+                                                        </div>
+                                                        <!--end socia-media-->
+                                                        <div class="mt-4">
+                                                            <h5 class="fs-17 fw-semibold mb-3 mb-3">
+                                                                Change Password
+                                                            </h5>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label for="current-password-input" class="form-label">Current password</label>
+                                                                        <input type="password" class="form-control" placeholder="Enter Current password" id="current-password-input" name="current_password" required>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="new-password-input" class="form-label">New password</label>
+                                                                        <input type="password" class="form-control" placeholder="Enter new password" id="new-password-input" name="new_password">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label for="confirm-password-input" class="form-label">Confirm Password</label>
+                                                                        <input type="password" class="form-control" placeholder="Enter Confirm Password" id="confirm-password-input" name="confirm_password">
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="verification" name="two_step_verification">
+                                                                        <label class="form-check-label" for="verification">
+                                                                            Enable Two-Step Verification via email
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+                                                        </div>
+                                                        <!--end Change-password-->
+                                                        <div class="mt-4 text-end">
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                    </form>
+                                                    
+                                                    <!--end form-->
+                                                </div>
+                                                <!--end tab-pane-->
+                                            </div>
+                                            <!--end tab-content-->
+                                        </div>
+                                        <!--end card-body-->
+                                    </div>
+                                    <!--end profile-content-page-->
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- END PROFILE -->
+{% endblock content %}
+{% block javascript %}
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script>
+            // Function to validate the new password and confirm password
+            function validatePassword() {
+            var newPassword = document.getElementById('new-password-input').value;
+            var confirmPassword = document.getElementById('confirm-password-input').value;
+        
+            if (newPassword !== confirmPassword) {
+                alert('New password and confirm password do not match');
+                return false; // Prevent form submission
+            }
+        
+            return true; // Allow form submission
+            }
+        </script>
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- Job-list Init Js -->
+        <script src="{% static 'js/pages/job-list.init.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <!-- App Js -->
+        <script src="{% static 'js/app.js' %}"></script>
+
+        
+    <script>
+        var count_edu_form = {% if user_info.education_details %} {{ user_info.education_details|length }} {% else %} 0 {% endif %};
+        function add_eduction_form() {
+
+            var education_tags = `
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label">Field of study</label>
+                        <input type="text" class="form-control" name="study-field-${count_edu_form}" >
+                    </div>
+                </div>
+                                                                    <!--end col-->
+                
+                                                                    <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label">School Name</label>
+                        <input type="text" class="form-control" name="school-field-${count_edu_form}" >
+                    </div>
+                </div>
+                                                                    <!--end col-->
+
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label">Start Year</label>
+                        <input type="text" class="form-control" name="deg-start-year-${count_edu_form}" >
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label">End Year</label>
+                        <input type="text" class="form-control" name="deg-end-year-${count_edu_form}" >
+                    </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="deg-description-${count_edu_form}" rows="5"></textarea>
+                    </div>
+                </div>
+                <!--end col-->
+            </div> `
+            count_edu_form += 1;
+            document.getElementById("education-block").appendChild($(education_tags).get()[0])
+
+        }
+        var count_exp_form = {% if user_info.experience_details %} {{ user_info.experience_details|length }} {% else %} 0 {% endif %};
+        function add_experience_form() {
+
+            
+            var tags =  `
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" name="experience-field-${count_exp_form}">
+                    </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label class="form-label">Company name</label>
+                        <input type="text" class="form-control" name="company-field-${count_exp_form}">
+                    </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label">Start Year</label>
+                        <input type="text" class="form-control" name="experience-start-year-${count_exp_form}">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label class="form-label">End Year</label>
+                        <input type="text" class="form-control" name="experience-end-year-${count_exp_form}">
+                    </div>
+                </div>
+                <!--end col-->
+
+                <div class="col-lg-12">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="experience-description-${count_exp_form}"
+                            rows="5"></textarea>
+                    </div>
+                </div>
+                <!--end col-->
+            </div> `
+            count_exp_form += 1;
+            document.getElementById("experience-block").appendChild($(tags).get()[0])
+
+        }
+
+        function previewImg(input) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+          
+              reader.onload = function (e) {
+                document.getElementById("profile-img").src = e.target.result
+                //$('#profile-img').attr('src', e.target.result).width(150).height(200);
+              };
+          
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+
+    </script>
+
+
+{% endblock javascript %}

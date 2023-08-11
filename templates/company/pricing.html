@@ -1,0 +1,267 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Pricing{% endblock title %}
+{% block content %}
+
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Pricing</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Company</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Pricing </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+
+                    <!-- START PRICING -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <div class="text-center">
+                                        <span class="badge bg-soft-warning  fs-15 mb-2">Choose Your Plan</span>
+                                        <h3>Save up to 15%</h3>
+                                        <p class="text-muted">The faster, most seamless CI & development you'll find anywhere.</p>
+                                    </div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                {% csrf_token %}
+                                {% for i in pricing_plan %}
+                                    <div class="col-lg-4 col-md-6 mt-5 pt-2">
+                                        <div class="pricing-box card bg-light">
+                                            <div class="card-body p-4 px-lg-5">
+                                                <div class="pricing-icon bg-light rounded-circle icons-md">
+                                                    <i class="uim uim-telegram-alt"></i>
+                                                </div>
+                                                <div class="pricing-name text-center mt-4 pt-2">
+                                                    <h4 class="fs-18">{{ i.name }}</h4>
+                                                </div>
+                                                <div class="pricing-price text-center mt-4">
+                                                    <h2 class="fw-semibold">{{ i.price }}<small class="fs-16">/mo</small></h2>
+                                                </div>
+                                                <ul class="list-unstyled pricing-details text-muted mt-4">
+                                                    {% if i.customizable_field1 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i> {{ i.customizable_field1 }}</li>{% endif %}
+                                                    {% if i.customizable_field2 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i> {{ i.customizable_field2 }}</li>{% endif %}
+                                                    {% if i.customizable_field3 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i> {{ i.customizable_field3 }}</li>{% endif %}
+                                                    {% if i.customizable_field4 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i>  {{ i.customizable_field4 }}</li>{% endif %}
+                                                    {% if i.customizable_field5 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i>  {{ i.customizable_field5 }}</li>{% endif %}
+                                                    {% if i.customizable_field6 %}<li class="pricing-item"><i class="mdi mdi-check-bold bg-soft-success me-2"></i> {{ i.customizable_field6 }} </li>{% endif %}
+                                                </ul>
+                                                <div class="text-center mt-4 mb-2">
+                                                    {% if user.is_authenticated %}
+                                                        {% if i.id != profile_info.purchased_package_id%}
+
+
+
+                                                        <a href="/company/pricing#pay_section"  data-id={{i.id| safe}}
+                                                         data-price={{i.price|safe}} data-id={i.id} data-name={{i.name|safe}} value={{i.price}}
+                                                         class="btn btn-soft-primary rounded-pill  my_paypal_btn">Purchase Now<i class="uil uil-arrow-right"></i></a>
+                                                        {% else %}
+                                                        <a href="{% url 'plan-cancelled' %}" class="btn btn-soft-success rounded-pill">Cancel Subscription <i class="uil uil-arrow-right"></i></a>
+                                                        {% endif %}
+                                                    {% else %}
+
+
+                                                    
+
+                                                        <a href="{% url 'sign-in' %}"  class="btn btn-soft-primary rounded-pill">Sign In <i class="uil uil-arrow-right"></i></a>
+
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div><!--end pricing-box-->
+                                    </div><!--end col-->
+                                {% endfor %}
+                              
+                             
+                            </div><!--end row-->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END PRICING -->
+
+                    <section id="pay_section" style="text-align:center">
+                        <div id="paypal-button-container" style="margin:0 auto;width:50%;"></div>
+ 
+                    </section>
+
+                    <!--START CTA-->
+                    <section class="section bg-light">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="section-title text-center">
+                                    <h3 class="title mb-4 pb-2">See everything about your employee at one place.</h3>
+                                    <p class="para-desc text-muted mx-auto">Start working with Jobcy that can provide everything you need to generate awareness, drive traffic, connect.</p>
+                                    <div class="mt-4">
+                                        <a href="{% url 'contact' %}" class="btn btn-primary btn-hover mt-2"><i class="uil uil-phone me-1"></i> Contact</a>
+                                        <a href="{% url 'faqs' %}" class="btn btn-outline-primary btn-hover ms-sm-1 mt-2"><i class="uil uil-file-question me-1"></i> Faq's</a>
+                                    </div>
+                                </div>
+                            </div><!--end row-->
+                        </div><!--end container-->
+                    </section>
+                    <!--END CTA-->
+
+                    <!-- START CTA -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="pricing-counter text-white">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="counter-box mt-3">
+                                            <div class="counters text-center">
+                                                <h5 class="counter mb-0">15,000+</h5>
+                                                <h6 class="fs-16 mt-3">Available Jobs</h6>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="counter-box mt-3">
+                                            <div class="counters text-center">
+                                                <h5 class="counter mb-0">7500+</h5>
+                                                <h6 class="fs-16 mt-3">Applications</h6>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="counter-box mt-3">
+                                            <div class="counters text-center">
+                                                <h5 class="counter mb-0">8.85K</h5>
+                                                <h6 class="fs-16 mt-3">Positive Feedback</h6>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="counter-box mt-3">
+                                            <div class="counters text-center">
+                                                <h5 class="counter mb-0">9875</h5>
+                                                <h6 class="fs-16 mt-3">Members</h6>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div><!--end pricing-counter-->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END CTA -->
+
+
+
+    
+
+
+{% endblock content %}
+{% block javascript %}
+    <script src="https://www.paypal.com/sdk/js?client-id=AaVyPViIwmMH7N0G5oPk83Aqoi2C91yI73snzMYVlHvTCkpJMtvAVa8tLKL6ttRjiMJa6LSzJHolSsdF&currency=USD"></script>
+        
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <!-- Counter Js -->
+        <script src="{% static 'js/pages/counter.init.js' %}"></script>
+        
+        <script src="{% static 'js/app.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
+
+
+        <script>
+
+            var selectedPrice = null;
+            var selectedId = null;
+
+            $('.my_paypal_btn').click(function(e) {
+                selectedPrice = $(this).data('price');
+                selectedId = $(this).data('id');
+                console.log(selectedPrice,selectedId);
+            })
+           
+            paypal.Buttons({
+    
+                 createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                            value: selectedPrice
+                            }
+                        }]
+                            });
+                 },
+            onApprove: function(data, actions) {
+            return actions.order.capture().then(function (details){
+                alert('Transaction completed by' + details.payer.name.given_name + '!');
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/company/update_Count", // Replace with the URL of your Django view
+                    data: {
+                        'id': selectedId,
+                    },
+                    success: function(response) {
+                        // Handle success if needed
+                        console.log('Data sent successfully.');
+                    },
+                    error: function(error) {
+                        // Handle error if needed
+                        console.error('Error sending data:', error);
+                    }
+                });
+                
+
+
+            });
+        }
+    }).render('#paypal-button-container');
+    </script>
+
+        {% comment %} <div class="blackbox" id="blackbox"
+          style="background-color: rgba(0, 0, 0, 0.8);position: fixed;display: none;align-items: center;top: 0;right: 0;width: 100%;height: 100%;z-index: 999;">
+            <div style="margin: 0 auto;padding: 20px;background: white;padding: 50px;">
+                <div class="pw-btn-wrap mt-4">
+                  
+                    <div id="paypal-button-container"></div>
+
+
+                </div>
+            </div>
+        </div> {% endcomment %}
+{% endblock javascript %}

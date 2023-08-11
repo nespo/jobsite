@@ -1,0 +1,336 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Company Details{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+
+        <!-- Light Box Css -->
+        <link rel="stylesheet" href="{% static 'libs/glightbox/dist/css/glightbox.min.css' %}">  
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Company Details</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Company Details </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                     <!-- START CANDIDATE-DETAILS -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card side-bar">
+                                        <div class="card-body p-4">
+                                            <div class="candidate-profile text-center">
+                                                <img src="{% if company_info_list.profile_pic %}/{{company_info_list.profile_pic}}{% endif %}" alt="" class="avatar-lg rounded-circle">
+                                                <h6 class="fs-18 mb-1 mt-4">{{company_info_list.company_name}}</h6>
+                                                <p class="text-muted mb-4">Since {{company_info_list.established}}</p>
+                                                <ul class="candidate-detail-social-menu list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <a href="javascript:void(0)" class="social-link"><i class="uil uil-twitter-alt"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="javascript:void(0)" class="social-link"><i class="uil uil-whatsapp"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="javascript:void(0)" class="social-link"><i class="uil uil-phone-alt"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div><!--end candidate-profile-->
+
+                                        <div class="candidate-profile-overview  card-body border-top p-4">
+                                            <h6 class="fs-17 fw-semibold mb-3">Profile Overview</h6>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>
+                                                    <div class="d-flex">
+                                                        <label class="text-dark">Owner Name</label>
+                                                        <div>
+                                                            <p class="text-muted mb-0">{{company_info_list.owner_name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex">
+                                                        <label class="text-dark">Employees</label>
+                                                        <div>
+                                                            <p class="text-muted mb-0">{{company_info_list.total_employees}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex">
+                                                        <label class="text-dark">Location</label>
+                                                        <div>
+                                                            <p class="text-muted mb-0">{{company_info_list.location}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex">
+                                                        <label class="text-dark">Website</label>
+                                                        <div>
+                                                            <p class="text-muted text-break mb-0">{{company_info_list.company_website}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex">
+                                                        <label class="text-dark">Established</label>
+                                                        <div>
+                                                            <p class="text-muted mb-0">{{company_info_list.established}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-3">
+                                                <a href="javascript:void(0)" class="btn btn-danger btn-hover w-100"><i class="uil uil-phone"></i> Contact</a>
+                                            </div>
+                                        </div><!--candidate-profile-overview-->
+                                        <div class="card-body p-4 border-top">
+                                            <div class="ur-detail-wrap">
+                                                <div class="ur-detail-wrap-header">
+                                                    <h6 class="fs-17 fw-semibold mb-3">Working Days</h6>
+                                                </div>
+                                                <div class="ur-detail-wrap-body">
+                                                    <ul class="working-days">
+                                                        {% for work_day in company_info_list.working_days%}
+                                                            {% if work_day.timing != "closed" %}
+                                                                <li>{{work_day.day}}<span>{{work_day.timing}}</span></li>
+                                                            {% else %}
+                                                                <li>{{work_day.day}}<span class="text-danger">{{work_day.timing}}</span></li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <!-- <li>Monday<span>9AM - 5PM</span></li>
+                                                        <li>Tuesday<span>9AM - 5PM</span></li>
+                                                        <li>Wednesday<span>9AM - 5PM</span></li>
+                                                        <li>Thursday<span>9AM - 5PM</span></li>
+                                                        <li>Friday<span>9AM - 5PM</span></li>
+                                                        <li>Saturday<span>9AM - 5PM</span></li> -->
+                                                        <li>Sunday<span class="text-danger">Close</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-body-->
+                                        <div class="card-body p-4 border-top">
+                                            <h6 class="fs-17 fw-semibold mb-4">Company Location</h6>
+                                                <iframe src="{{company_info_list.location_url}}" 
+                                                style="width:100%"  height="250" allowfullscreen="" loading="lazy"></iframe>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+                                
+                                <div class="col-lg-8">
+                                    <div class="card ms-lg-4 mt-4 mt-lg-0">
+                                        <div class="card-body p-4">
+
+                                            <div class="mb-5">
+                                                <h6 class="fs-17 fw-semibold mb-4">About Company</h6>
+                                                <p class="text-muted">{{company_info_list.introduction}}</p>
+                                            </div>
+                                        
+                                            <div class="candidate-portfolio mb-5">
+                                                <h6 class="fs-17 fw-semibold mb-4">Gallery</h6>
+                                                <div class="row g-3">
+                                                    {% for gal in company_gallery%}
+                                                        <div class="col-lg-6">
+                                                            <div class="candidate-portfolio-box card border-0">
+                                                                <img src="/{{gal.companies_gallery}}" alt="" class="img-fluid">
+                                                                <div class="bg-overlay"></div>
+                                                                <div class="zoom-icon">
+                                                                    <a href="/{{gal.companies_gallery}}" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                    <!-- <div class="col-lg-6">
+                                                        <div class="candidate-portfolio-box card border-0">
+                                                            <img src="{% static 'images/blog/img-03.jpg' %}" alt="" class="img-fluid">
+                                                            <div class="bg-overlay"></div>
+                                                            <div class="zoom-icon">
+                                                                <a href="{% static 'images/blog/img-03.jpg' %}" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="candidate-portfolio-box card border-0">
+                                                            <img src="{% static 'images/blog/img-12.jpg' %}" alt="" class="img-fluid">
+                                                            <div class="bg-overlay"></div>
+                                                            <div class="zoom-icon">
+                                                                <a href="{% static 'images/blog/img-12.jpg' %}" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div><!-- end portfolio -->  
+                                            
+                                            <div>
+                                                <h6 class="fs-17 fw-semibold mb-4">Current Opening</h6>
+                                                
+
+
+                                                {% for job in jobs_list%}
+                                                <div class="job-box bookmark-post card mt-4">
+                                                    <div class="p-4">
+                                                        <div class="row">
+                                                            <div class="col-lg-2">
+                                                                <img src="{% if company_info_list.profile_pic %}/{{company_info_list.profile_pic}}{% endif %}" alt="" class="img-fluid rounded-3">
+                                                            </div>
+                                                            <div class="col-lg-10">
+                                                                <div class="mt-3 mt-lg-0">
+                                                                    <h5 class="fs-17 mb-1"><a href="{% url 'job-details' job.id %}" class="text-dark">{{job.job_title}}</a> <small class="text-muted fw-normal">Salary: {{job.salary}}</small></h5>
+                                                                    <ul class="list-inline mb-0">
+                                                                        <!-- <li class="list-inline-item">
+                                                                            <p class="text-muted fs-14 mb-0"></p>
+                                                                        </li> -->
+                                                                        <li class="list-inline-item">
+                                                                            <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> {{job.country}}, {{job.country}}</p>
+                                                                        </li>
+                                                                        <li class="list-inline-item">
+                                                                            <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> {{company_info_list.company_name}} / month</p>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="mt-2">
+                                                                        {% for i in job.job_type%}
+                                                                        <span class="badge bg-soft-success mt-1">{{i}}</span>
+                                                                        {% endfor %}
+                                                                       <!--  <span class="badge bg-soft-warning mt-1">Urgent</span>
+                                                                        <span class="badge bg-soft-info mt-1">Private</span> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+
+                                                        <!-- <div class="favorite-icon">
+                                                            <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
+                                                        </div> -->
+
+                                                    </div>
+                                                    <div class="p-3 bg-light">
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-md-8">
+                                                                <div>
+                                                                    <ul class="list-inline mb-0">
+                                                                        <li class="list-inline-item"><i class="uil uil-tag"></i> Keywords :</li>
+                                                                        <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">Ui designer</a>,</li>
+                                                                        <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <!--end col-->
+                                                            <div class="col-md-4">
+                                                                <div class="text-md-end">
+                                                                    <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+
+
+                                                <!--end job-box-->
+       
+                                            </div>
+                                        </div><!-- card body end -->
+                                    </div><!--end card-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END CANDIDATE-DETAILS -->
+
+                    <!-- START APPLY MODAL -->
+                    <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body p-5">
+                                    <div class="text-center mb-4">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+                                    </div>
+                                    <div class="position-absolute end-0 top-0 p-3">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nameFormControlInput" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="nameFormControlInput" placeholder="Enter your name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailFormControlInput" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="emailFormControlInput" placeholder="Enter your email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your message"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="inputGroupFile01">Resume Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile01">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Send Application</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- END APPLY MODAL -->
+{% endblock content %}
+{% block javascript %}
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+
+
+        <!-- Light Box Js -->
+        <script src="{% static 'libs/glightbox/dist/js/glightbox.min.js' %}"></script>
+
+        <script src="{% static 'js/pages/lightbox.init.js' %}"></script>
+
+        <!-- Masonary Js -->
+        <script src="{% static 'libs/masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
+
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+{% endblock javascript %}

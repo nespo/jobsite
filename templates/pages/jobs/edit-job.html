@@ -1,0 +1,237 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Candidate List{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Manage Job Post</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Jobs</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Manage Job Post </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                        <!-- START JOBS-POST-EDIT -->
+                        <section class="section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="bg-soft-primary p-3">
+                                                <h5 class="mb-0 fs-17">Post a New Job!</h5>
+                                        </div>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                                <form action="{% url 'edit-delete-job' %}" method="POST" class="job-post-form shadow mt-4">
+                                {% csrf_token %}
+                                    <div class="job-post-content box-shadow-md rounded-3 p-4">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="jobtitle" class="form-label">Job Title</label>
+                                                    <input name="jobtitle" type="text" class="form-control" id="jobtitle" placeholder="Title"
+                                                    value="{{job_info_list.job_title}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="jobdescription" class="form-label">Job Description</label>
+                                                    <textarea name="jobdescription" class="form-control" id="jobdescription" rows="3" placeholder="Enter Job Description"  required>{{job_info_list.job_description}}</textarea>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="responsibilities" class="form-label">Responsibilities</label>
+                                                    <textarea name="responsibilities" class="form-control" id="responsibilities" rows="3" placeholder="Enter Job Responsibilities" required>{{ job_info_list.responsibilities }}</textarea>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="qualification" class="form-label">Qualification</label>
+                                                    <textarea name="qualification" class="form-control" id="qualification" rows="3" placeholder="Enter Job Qualification" required>{{job_info_list.qualification }}</textarea>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="skillsandxperience" class="form-label">Skill & Experience</label>
+                                                    <textarea name="skillsandxperience" class="form-control" id="skillsandxperience" rows="3" placeholder="Enter Skills & Experience Required" required>{{job_info_list.skillsandxperience}}</textarea>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="email" class="form-label">Email Address</label>
+                                                    <input name="email" type="email" class="form-control" id="email" placeholder="Email Address" value="{{job_info_list.email}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                                    <input name="phoneNumber" type="number" class="form-control" id="phoneNumber" placeholder="Phone Number" value="{{job_info_list.phone_number}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="choices-single-categories" class="form-label">Categories</label>
+                                                    <select class="form-select" data-trigger="" name="categories" id="choices-single-categories" aria-label="Default select example">
+                                                        {% for cat in categories %}
+                                                            <option value="{{cat.name}}">{{cat.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="jobtype" class="form-label">Job Type</label>
+                                                    <select class="form-select" data-trigger="" name="jobtype" id="jobtype" aria-label="Default select example">
+                                                        {% for type in job_types %}
+                                                            <option value="{{type.name}}">{{type.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="designation" class="form-label">Designation</label>
+                                                    <input type="text" class="form-control" id="designation" value="{{job_info_list.designation}}" placeholder="Designation" name="designation" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="salary" class="form-label">Salary($)</label>
+                                                    <input type="number" class="form-control" id="salary" placeholder="Salary" name="salary" value="{{job_info_list.salary}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="basic_qualification" class="form-label">Basic Qualification</label>
+                                                    <input type="text" class="form-control" id="basic_qualification" placeholder="Qualification" name="basic_qualification" value="{% if job_info_list.basic_qualification %}{{job_info_list.basic_qualification}}{% endif %}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="skills" class="form-label">Job Skills </label>
+                                                    <input type="text" class="form-control" id="skills" placeholder="Job skills" name="skills" value="{{job_info_list.job_skills}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="experience" class="form-label">Experience Required</label>
+                                                    <input type="text" class="form-control" id="experience" name="experience" value="{{job_info_list.experience_req}}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="industry_type" class="form-label">Industry Type</label>
+                                                    <input type="text" class="form-control" id="industry_type"  name="industry_type" value="{% if job_info_list.industry_type %}{{job_info_list.industry_type}}{% endif %}" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label for="lastdate" class="form-label">Application Deadline Date</label>
+                                                    <input type="date" class="form-control" id="lastdate" name="lastdate" value="" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <script>
+                                                // Get the current date and format it to the "yyyy-MM-dd" format required for the input field
+                                                const currentDate = new Date().toISOString().slice(0, 10);
+                                                document.getElementById("lastdate").value = currentDate;
+                                            </script>
+                                            <!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="country" class="form-label">Country</label>
+                                                    <select class="form-select" data-trigger name="country" id="country" aria-label="Default select example" value="{{job_info_list.country}}" required>
+                                                        {% for location in locations %}
+                                                            <option value="{{ location }}">{{ location }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-3">
+                                                <div class="mb-4">
+                                                    <label for="city" class="form-label">City</label>
+                                                    <input type="text" class="form-control" id="city" placeholder="City" value="{{job_info_list.city}}" name="city" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-3">
+                                                <div class="mb-4">
+                                                    <label for="zipcode" class="form-label">Zipcode</label>
+                                                    <input type="text" value="{{job_info_list.zipcode}}" class="form-control" id="zipcode" placeholder="Zipcode" name="zipcode" required>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="mb-4">
+                                                    <label class="form-label">Upload Image</label>
+                                                    <input name="jobimage" type="file" class="form-control" id="jobimage">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-12">
+                                                <div class="text-end">
+                                                    <a href="{% url 'delete-job' job_id %}" class="btn btn-success">Delete Job</a>
+                                                    <button name="update_job" class="btn btn-primary" type="submit">Update Job</button>
+                                                </div>
+                                            </div><!--end col-->
+                                        </div><!--end row-->
+                                    </div><!--end job-post-content-->
+                                </form>
+                            </div><!--end container-->
+                        </section>
+                        <!-- END JOBS-POST-EDIT -->
+{% endblock content %}
+{% block javascript %}
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript">
+             window.onload = function() {
+              var tags = document.querySelector('#country');
+              for (var i = 0; i < tags.length; i++) {
+                var tag = tags[i];
+                tag.setAttribute("value", tag.innerHTML);
+              }
+            };
+        </script>
+{% endblock javascript %}

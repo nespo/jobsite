@@ -1,0 +1,281 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Blog Masonry{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Blog Masonry</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Blog</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Blog Masonry </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                    <!-- START MASONRY-BLOG -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row" data-masonry='{"percentPosition": true }'>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-01.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Creativity</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>What planning process needs</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-01.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Rebecca Swartz</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Project Manager</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-06.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Product</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>How to get creative in your work?</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-02.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Gabriel Palmer </h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Education Training</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-02.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Digital</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>Design your apps in your own way</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-03.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Betty Richards </h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Executive, HR Operations</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-07.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Business</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>Do traditional landing pages work for Saas startups?</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-04.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">MichaeL Drake </h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Full Stack Engineer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-08.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Design</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>Smartest Applications for Business</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-05.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Olivia Murphy</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Founder & CEO</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="ratio ratio-16x9">  <iframe src="https://www.youtube.com/embed/1y_kfWUCFDQ" title="YouTube video" allowfullscreen></iframe>  </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Digital, Business</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>A day in the of a professional fashion designer</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-06.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Brooke Hayes</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Developer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-03.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Business</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>A day in the of a professional fashion designer</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-07.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Jeffrey Montgomery</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Creative Designer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-09.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Product</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>A day in the of a professional fashion designer</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-08.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Cerys Woods</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Manager</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--end card-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card blog-masonry-box shadow overflow-hidden border-0 p-2">
+                                        <div class="overflow-hidden">
+                                            <img src="{% static 'images/blog/img-10.jpg' %}" alt="" class="img-fluid blog-img">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <p class="text-muted mb-2"><b>Fashion, Product</b> <i class="mdi mdi-circle-medium"></i> Aug 10, 2021</p>
+                                            <a href="{% url 'blog-details' %}" class="primary-link"><h5>A day in the of a professional fashion designer</h5></a>
+                                            <div class="d-flex align-items-center mt-4">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{% static 'images/user/img-09.jpg' %}" alt="" class="avatar-xs rounded-circle">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <a href="{% url 'blog-author' %}" class="primary-link"><h6 class="fs-16 mb-1">Charles Dickens</h6></a>
+                                                    <p class="text-muted fs-14 mb-0">Creative Designer</p>
+                                                </div>
+                                            </div>
+                                        </div><!--end card-->
+                                    </div><!--end post-box-->
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            
+                            <div class="row">
+                                <div class="col-lg-12 mt-5">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination job-pagination mb-0 justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                    <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">
+                                                    <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div><!--end col-->
+                            </div><!-- end row -->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END MASONRY-BLOG -->
+{% endblock content %}
+{% block javascript %}
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+        
+        <!-- Masonary Js -->
+        <script src="{% static 'libs/masonry-layout/dist/masonry.pkgd.min.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+{% endblock javascript %}

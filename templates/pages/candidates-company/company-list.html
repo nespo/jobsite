@@ -1,0 +1,149 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Company List{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Company List</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Company List </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+
+                    <!-- START COMPANY-LIST -->
+                    <section class="section">
+                        <div class="container">
+                            
+                            <div class="row">
+
+                                {% for company in companies_list%}
+                                    {% if company.company_name %}
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="card text-center mb-4">
+                                                <div class="card-body px-4 py-5">
+                                                    <!-- <div class="featured-label">
+                                                        <span class="featured">4.9 <i class="mdi mdi-star-outline"></i></span>
+                                                    </div> -->
+                                                    <img src="{% if company.profile_pic %} /{{company.profile_pic}}{% else %} {% static 'images/profile.jpg' %} {% endif %}" alt="" class="img-fluid rounded-3">
+                                                    <div class="mt-4">
+                                                        <a href="{% url 'company-details' company.id %}" class="primary-link"><h6 class="fs-18 mb-2">{{company.company_name}}</h6></a>
+                                                        <p class="text-muted mb-4">{% if company.location%}{{company.location}}{% endif %}</p>
+
+                                                        <a href="{% url 'company-details' company.id %}" class="btn btn-primary">{{total_jobs|get_item:company.id}} Opening Jobs</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+                                    {% endif %}
+
+                                {% endfor %}
+
+
+                                   
+                            </div><!--end row-->
+
+                            <div class="row">
+                                <div class="col-lg-12 mt-5">
+                                    <!-- Render pagination links -->
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination job-pagination mb-0 justify-content-center">
+                                            {% if companies_list.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{% url 'company-list' %}?page={{ companies_list.previous_page_number }}">
+                                                        <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                        <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+
+                                            {% for page in companies_list.paginator.page_range %}
+                                                {% if companies_list.number == page %}
+                                                    <li class="page-item active">
+                                                        <a class="page-link" href="javascript:void(0)">{{ page }}</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{% url 'company-list' %}?page={{ page }}">{{ page }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if companies_list.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{% url 'company-list' %}?page={{ companies_list.next_page_number }}">
+                                                        <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                        <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div><!--end col-->
+                            </div><!-- end row -->
+                        </div><!--end container-->
+                    </section>
+                    <!-- END COMPANY-LIST -->
+{% endblock content %}
+{% block javascript %}
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+
+
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- Candidate Js -->
+        <script src="{% static 'js/pages/candidate.init.js' %}"></script>
+
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+
+        <script src="{% static 'js/app.js' %}"></script>
+{% endblock javascript %}

@@ -1,0 +1,471 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Job Grid 2{% endblock title %}
+{% block extra_css %}
+        <!-- Choise Css -->
+        <link rel="stylesheet" href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+                    <!-- Start home -->
+                    <section class="page-title-box">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center text-white">
+                                        <h3 class="mb-4">Job Grid-2</h3>
+                                        <div class="page-next">
+                                            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+                                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                                                    <li class="breadcrumb-item active" aria-current="page"> Job Grid-2 </li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end container-->
+                    </section>
+                    <!-- end home -->
+
+                    <!-- START SHAPE -->
+                    <div class="position-relative" style="z-index: 1">
+                        <div class="shape">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                                <path fill="#FFFFFF" fill-opacity="1"
+                                    d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- END SHAPE -->
+
+
+                    <!-- START JOB-GRID -->
+                    <section class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>   
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-01.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Magento Developer</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$500/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 1 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 min ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box bookmark-post">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-02.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Marketing Director</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$850/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 3 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Director</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">15 days ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-03.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Magento Developer</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$780/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">0 - 1 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 hrs ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-04.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Project Leader</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$900/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">2 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">30 min ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-05.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Graphic Designer</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$350/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min 0.6 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Designer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 days ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box bookmark-post">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-06.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Store Manager</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$950/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 1.5 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Manager</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 days ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div><!--end job-grid-content-->
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box bookmark-post">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-07.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Product Designer</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$750/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 1 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">1 hrs ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div><!--end job-grid-content-->  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-08.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Business Associate</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$780/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 1 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 days ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div><!--end job-grid-content-->  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+                                
+                                <div class="col-lg-4 col-md-6 mt-4">
+                                    <div class="card job-grid-box">
+                                        <div class="card-body p-4">
+                                            <div class="favorite-icon">
+                                                <a href="javascript:void(0)"><i class="uil uil-heart-alt"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'company-details' %}"><img src="{% static 'images/featured-job/img-09.png' %}" alt="" class="img-fluid rounded-3"></a>
+                                            </div>
+                                            <div class="mt-4">
+                                                <a href="{% url 'job-details' %}" class="primary-link"><h5 class="fs-17 mb-1">Product Sales Specialist</h5></a>
+                                                <p class="text-muted">Jobcy Technology Pvt.Ltd</p>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-success fs-13 mt-1">$780/ Month</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-purple fs-13 mt-1">Min. 1 Year</span>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <span class="badge bg-soft-blue fs-13 mt-1">Developer</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="job-grid-content mt-3">
+                                                <p class="text-muted">As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent.</p>
+                                                <div class="d-flex align-items-center justify-content-between mt-4 border-top pt-3">
+                                                    <p class="text-muted float-start mb-0">2 days ago</p>
+                                                    <div class="text-end">
+                                                        <a href="#applyNow" data-bs-toggle="modal" class="btn btn-sm btn-primary">Apply Now <i class="uil uil-angle-right-b"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div><!--end job-grid-content-->  
+                                        </div><!--end card-body-->
+                                    </div><!--end job-grid-box-->
+                                </div><!--end col-->
+
+                            </div><!--end row-->
+
+                            <div class="row">
+                                <div class="col-lg-12 mt-5">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination job-pagination mb-0 justify-content-center">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                                    <i class="mdi mdi-chevron-double-left fs-15"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
+                                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">
+                                                    <i class="mdi mdi-chevron-double-right fs-15"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div><!--end col-->
+                            </div><!-- end row -->
+
+                        </div><!--end container-->
+                    </section>
+                    <!-- END JOB-GRID -->
+
+                    <!-- START APPLY MODAL -->
+                    <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body p-5">
+                                    <div class="text-center mb-4">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+                                    </div>
+                                    <div class="position-absolute end-0 top-0 p-3">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nameControlInput" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="nameControlInput" placeholder="Enter your name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="emailControlInput2" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="emailControlInput2" placeholder="Enter your email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="messageControlTextarea" class="form-label">Message</label>
+                                        <textarea class="form-control" id="messageControlTextarea" rows="4" placeholder="Enter your message"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="inputGroupFile01">Resume Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile01">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Send Application</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- END APPLY MODAL -->
+{% endblock content %}
+{% block javascript %}
+        
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+        
+        <!-- Choice Js -->
+        <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+               
+        <!-- Switcher Js -->
+        <script src="{% static 'js/pages/switcher.init.js' %}"></script>
+        
+        <script src="{% static 'js/app.js' %}"></script>
+        <script>
+            var textRemove = new Choices(
+            document.getElementById('choices-text-remove-button'),
+                {
+                delimiter: ',',
+                editItems: true,
+                maxItemCount: 5,
+                removeItemButton: true,
+                }
+            );
+        </script>
+
+{% endblock javascript %}
